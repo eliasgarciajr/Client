@@ -40,4 +40,8 @@
     <ProjectReference Include="..\Client.Model\Client.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

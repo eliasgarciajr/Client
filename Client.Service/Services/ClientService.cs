@@ -1,135 +1,53 @@
-﻿using AutoMapper;
-using Client.Data;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Client.Model.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Client.Data.Repository;
 using Client.Model.Data;
-
-namespace Client.Services
+using Client.Model.ViewModels;
+using ClientModel = Client.Model.Data.AClient;
+namespace Client.Service.Services
 {
-    public interface IClientService
-    {
-        IActionResult Add(AClient claim);
-        IActionResult Delete(int id);
-        IActionResult GetById(int id);
-        IActionResult Get();
-        IActionResult Update(AClient claim);            
-    }
-
     public class ClientService : IClientService
     {
-        private readonly ClientDbContext _context;
-        private readonly IMapper _mapper;
+        private IARepository<ClientModel> _repository;
 
-        public ClientService(ClientDbContext service, IMapper mapper)
+        public ClientService(IARepository<ClientModel> repository)
         {
-            _context = service;
-            _mapper = mapper;
+            _repository = repository;
+        }
+        public async Task<IActionResult> GetAll(ClientListRequestModel request)
+        {
+            var lst = await _repository.ToListAnsyc();
+            return new OkObjectResult(lst.ToList());
         }
 
-        public IActionResult Get()
-        {
-            var query = _context.Set<AClient>()
-                .Include(x => x.Phones)                
-                .AsQueryable()
-                .AsNoTracking();            
+        public async Task<IActionResult> GetOne(GenericSingleRequestModel<ClientModel> request)
+        {          
 
-            
-            return new OkObjectResult(query.Select(x => _mapper.Map<AddClientRequest>(x)).ToList());
-            
+            var result = _repository.Find(c => c.Id == request.Id);
+
+            return new OkObjectResult(result);
         }
 
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> Delete(GenericDeleteRequestModel<ClientModel> request)
         {
-            try
-            {
-                if (id == 0) return new BadRequestObjectResult("Id not informed");
-                var obj = _context.Set<AClient>()
-                    .Include(x => x.Phones).FirstOrDefault(x => x.Id == id);
-                if (obj == null) return new BadRequestObjectResult("Client not found");
+            _repository.Delete(request.Id);
+            return new NoContentResult();
+        }
 
-                var result = _mapper.Map<AClient>(obj);                
+        public async Task<IActionResult> Post(ClientPostRequestModel request)
+        {
+            //var model = new GatheringModel();
+            _repository.Insert(request.Data);
+            return new OkObjectResult(request.Data);
+        }
 
-                return new OkObjectResult(result);
-            }
-            catch (Exception ex)
-            {
-                return new BadRequestObjectResult(ex.Message);
-            }
+        public async Task<IActionResult> Put(ClientPutRequestModel request)
+        {
+            //var model = new GatheringModel();
+            _repository.Update(request.Data);
+            return new OkObjectResult(request.Data);
         }
        
-        public IActionResult Delete(int id)
-        {
-            try
-            {
-
-                if (id == 0) return new BadRequestObjectResult("Id not informed");
-                var obj = _context.Set<AClient>()
-                .Include(x => x.Phones)                
-                .FirstOrDefault(x => x.Id == id);
-                if (obj == null) return new BadRequestObjectResult("Client not found");                               
-
-                foreach (var item in obj.Phones)
-                {
-                    _context.Phones.Remove(item);
-                }              
-                _context.Clients.Remove(obj);
-                _context.SaveChanges();
-
-                return new OkObjectResult("Object removed");
-            }
-            catch (Exception ex)
-            {
-                return new BadRequestObjectResult("Error! " + ex.Message);
-            }
-        }
-
-        public IActionResult Add(AClient obj)
-        {
-            try
-            {
-                //if (!obj.FederalLicense.IsNullOrEmpty()
-                //    && _context.Clients.Any(x => x.FederalLicense.Equals(obj.FederalLicense)))
-                //    return new BadRequestObjectResult("CNPJ já existente");               
-
-                _context.Attach(obj);
-                _context.Entry(obj).State = EntityState.Added;
-                _context.SaveChanges();                
-
-                return new OkObjectResult(new { obj });
-            }
-            catch (Exception ex)
-            {
-                return new BadRequestObjectResult("Error! " + ex.Message);
-            }
-        }
-
-        public IActionResult Update(AClient model)
-        {
-            try
-            {
-                if (model.Id == 0) return new BadRequestObjectResult("Id not informed");
-                var exists = _context.Clients.Any(x => x.Id == model.Id);
-                if (!exists) return new BadRequestObjectResult("Client not found");
-                
-
-                _context.Attach(model);
-                _context.Entry(model).State = EntityState.Modified;                              
-                _context.SaveChanges();
-
-                return GetById(model.Id);
-            }
-            catch (Exception ex)
-            {
-                return new BadRequestObjectResult("Error! " + ex.Message);
-            }
-        }     
-        
     }
 }

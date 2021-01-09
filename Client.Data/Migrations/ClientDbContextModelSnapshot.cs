@@ -72,7 +72,7 @@ namespace Client.Data.Migrations
             modelBuilder.Entity("Client.Model.Data.Phone", b =>
                 {
                     b.HasOne("Client.Model.Data.AClient", "Client")
-                        .WithMany()
+                        .WithMany("Phones")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();

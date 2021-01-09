@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Client.Data.Migrations
 {
     [DbContext(typeof(ClientDbContext))]
-    [Migration("20210109170545_Initial")]
+    [Migration("20210109202057_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,7 +74,7 @@ namespace Client.Data.Migrations
             modelBuilder.Entity("Client.Model.Data.Phone", b =>
                 {
                     b.HasOne("Client.Model.Data.AClient", "Client")
-                        .WithMany()
+                        .WithMany("Phones")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();

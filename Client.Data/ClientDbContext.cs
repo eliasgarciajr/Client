@@ -13,10 +13,7 @@ namespace Client.Data
 {
 	public class ClientDbContext : Microsoft.EntityFrameworkCore.DbContext
 		
-	{
-
-		public DbSet<AClient> Clients { get; set; }
-		public DbSet<Phone> Phones { get; set; }
+	{		
 
 		public ClientDbContext(DbContextOptions options) : base(options)
 		{

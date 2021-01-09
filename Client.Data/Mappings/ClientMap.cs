@@ -20,8 +20,9 @@ namespace Client.Data.Mappings
 				builder.Property(c => c.LastName);
 				builder.Property(c => c.DateBirth);
 				builder.Property(c => c.Email);
-				builder.Property(c => c.Password);			
+				builder.Property(c => c.Password);
 
+				builder.HasMany(c => c.Phones).WithOne();						
 		}
 	}
 }

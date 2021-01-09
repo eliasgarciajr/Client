@@ -18,10 +18,7 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Client.Microservice.IoC;
-using Client.Services;
-using Client.Data;
-using Microsoft.EntityFrameworkCore;
-using Client.Configuration;
+using Client.Service.Handlers;
 
 namespace Client.Microservice
 {
@@ -35,8 +32,9 @@ namespace Client.Microservice
 		public IConfiguration Configuration { get; }
 
 		// This method gets called by the runtime. Use this method to add services to the container.
-		public void ConfigureServices(IServiceCollection services)		{
-			
+		public void ConfigureServices(IServiceCollection services)		
+		{			
+
 			services.AddMediatR(typeof(ClientRequestHandler).Assembly);
 			services.AddControllers().AddNewtonsoftJson(options =>
 			{				
@@ -49,7 +47,6 @@ namespace Client.Microservice
                 resolver.NamingStrategy = new CamelCaseNamingStrategy();
             });
 
-			services.AddDbContext<ClientDbContext>(options => options.UseSqlServer(ClientSettings.GetConnectionString(EClientProjects.Client)));
 
 			services.RegistServices();
 

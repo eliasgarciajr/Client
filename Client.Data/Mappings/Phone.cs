@@ -17,9 +17,8 @@ namespace Client.Data.Mappings
 						.ValueGeneratedOnAdd();
 
 			builder.Property(c => c.NumberPhone);
-			builder.HasOne(x => x.Client)
-					  .WithMany()
-					  .HasForeignKey(x => x.ClientId);
+			builder.HasOne(x => x.Client)						
+					  .WithMany(x => x.Phones);			
 
 		}
 	}

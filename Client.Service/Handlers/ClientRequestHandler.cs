@@ -1,58 +1,51 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Client.Model.Data;
 using Client.Model.ViewModels;
+using Client.Service.Services;
 
-namespace Client.Services
+namespace Client.Service.Handlers
 {
-    public class ClientRequestHandler :
-        IRequestHandler<AddClientRequest, IActionResult>,
-        IRequestHandler<DeleteClientRequest, IActionResult>,
-        IRequestHandler<GetClientRequest, IActionResult>,
-        IRequestHandler<GetAllClientRequest, IActionResult>,
-        IRequestHandler<UpdateClientRequest, IActionResult>
+    public class ClientRequestHandler : IRequestHandler<ClientListRequestModel, IActionResult>,
+        IRequestHandler<ClientSingleRequestModel, IActionResult>,
+        IRequestHandler<ClientDeleteRequestModel, IActionResult>,
+        IRequestHandler<ClientPostRequestModel, IActionResult>,
+        IRequestHandler<ClientPutRequestModel, IActionResult>        
     {
-        private readonly IMapper _mapper;
-        private readonly IClientService _service;
+        private IClientService _service;
 
-        public ClientRequestHandler(IClientService service, IMapper mapper)
+        public ClientRequestHandler(IClientService service)
         {
             _service = service;
-            _mapper = mapper;
         }
 
-        public Task<IActionResult> Handle(DeleteClientRequest model, CancellationToken cancellation)
+        public async Task<IActionResult> Handle(ClientListRequestModel request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(_service.Delete(model.Id));
+            return await _service.GetAll(request);
         }
 
-        public Task<IActionResult> Handle(GetAllClientRequest model, CancellationToken cancellation)
+        public async Task<IActionResult> Handle(ClientSingleRequestModel request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(_service.Get());
+            return await _service.GetOne(request);
         }
 
-        public Task<IActionResult> Handle(GetClientRequest model, CancellationToken cancellation)
+        public async Task<IActionResult> Handle(ClientDeleteRequestModel request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(_service.GetById(model.Id));
+            return await _service.Delete(request);
         }
 
-        public Task<IActionResult> Handle(AddClientRequest model, CancellationToken cancellation)
-        {           
-
-            var obj = _mapper.Map<AClient>(model);
-
-            return Task.FromResult(_service.Add(obj));
+        public async Task<IActionResult> Handle(ClientPostRequestModel request, CancellationToken cancellationToken)
+        {
+            return await _service.Post(request);
         }
 
-        public Task<IActionResult> Handle(UpdateClientRequest model, CancellationToken cancellation)
-        {         
-            var obj = _mapper.Map<AClient>(model);
-            return Task.FromResult(_service.Update(obj));
-        }        
+        public async Task<IActionResult> Handle(ClientPutRequestModel request, CancellationToken cancellationToken)
+        {
+            return await _service.Put(request);
+        }         
+        
+       
     }
 }
