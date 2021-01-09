@@ -1,0 +1,11 @@
+{ 
+  
+  "configs": [
+		{
+			"projeto": 0,
+			"host": "",
+			"connectionString": "Data Source=LAPTOP-7JK0FR9M; Initial Catalog=db_client; Integrated Security=True; Connect Timeout=30; Encrypt=False; TrustServerCertificate=False; ApplicationIntent=ReadWrite; MultiSubnetFailover=False"
+		}
+		
+  ]
+}

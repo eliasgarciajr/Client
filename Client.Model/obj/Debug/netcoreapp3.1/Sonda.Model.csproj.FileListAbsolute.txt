@@ -1,0 +1,9 @@
+C:\Elias\Cappta\Sonda.Model\bin\Debug\netcoreapp3.1\Sonda.Model.deps.json
+C:\Elias\Cappta\Sonda.Model\bin\Debug\netcoreapp3.1\Sonda.Model.dll
+C:\Elias\Cappta\Sonda.Model\bin\Debug\netcoreapp3.1\Sonda.Model.pdb
+C:\Elias\Cappta\Sonda.Model\obj\Debug\netcoreapp3.1\Sonda.Model.AssemblyInfoInputs.cache
+C:\Elias\Cappta\Sonda.Model\obj\Debug\netcoreapp3.1\Sonda.Model.AssemblyInfo.cs
+C:\Elias\Cappta\Sonda.Model\obj\Debug\netcoreapp3.1\Sonda.Model.csproj.CoreCompileInputs.cache
+C:\Elias\Cappta\Sonda.Model\obj\Debug\netcoreapp3.1\Sonda.Model.dll
+C:\Elias\Cappta\Sonda.Model\obj\Debug\netcoreapp3.1\Sonda.Model.pdb
+C:\Elias\Cappta\Sonda.Model\obj\Debug\netcoreapp3.1\Sonda.Model.csprojAssemblyReference.cache

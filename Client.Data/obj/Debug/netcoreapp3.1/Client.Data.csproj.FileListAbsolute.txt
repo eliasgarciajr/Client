@@ -1,0 +1,16 @@
+C:\Elias\Estudos\Client\Client\Client.Data\bin\Debug\netcoreapp3.1\Configuration\ClientSettings.json
+C:\Elias\Estudos\Client\Client\Client.Data\bin\Debug\netcoreapp3.1\Client.Data.deps.json
+C:\Elias\Estudos\Client\Client\Client.Data\bin\Debug\netcoreapp3.1\Client.Data.runtimeconfig.json
+C:\Elias\Estudos\Client\Client\Client.Data\bin\Debug\netcoreapp3.1\Client.Data.runtimeconfig.dev.json
+C:\Elias\Estudos\Client\Client\Client.Data\bin\Debug\netcoreapp3.1\Client.Data.dll
+C:\Elias\Estudos\Client\Client\Client.Data\bin\Debug\netcoreapp3.1\Client.Data.pdb
+C:\Elias\Estudos\Client\Client\Client.Data\bin\Debug\netcoreapp3.1\Client.Model.dll
+C:\Elias\Estudos\Client\Client\Client.Data\bin\Debug\netcoreapp3.1\Client.Model.pdb
+C:\Elias\Estudos\Client\Client\Client.Data\obj\Debug\netcoreapp3.1\Client.Data.csprojAssemblyReference.cache
+C:\Elias\Estudos\Client\Client\Client.Data\obj\Debug\netcoreapp3.1\Client.Data.AssemblyInfoInputs.cache
+C:\Elias\Estudos\Client\Client\Client.Data\obj\Debug\netcoreapp3.1\Client.Data.AssemblyInfo.cs
+C:\Elias\Estudos\Client\Client\Client.Data\obj\Debug\netcoreapp3.1\Client.Data.csproj.CoreCompileInputs.cache
+C:\Elias\Estudos\Client\Client\Client.Data\obj\Debug\netcoreapp3.1\Client.Data.csproj.CopyComplete
+C:\Elias\Estudos\Client\Client\Client.Data\obj\Debug\netcoreapp3.1\Client.Data.dll
+C:\Elias\Estudos\Client\Client\Client.Data\obj\Debug\netcoreapp3.1\Client.Data.pdb
+C:\Elias\Estudos\Client\Client\Client.Data\obj\Debug\netcoreapp3.1\Client.Data.genruntimeconfig.cache
