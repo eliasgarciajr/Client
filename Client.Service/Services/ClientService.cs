@@ -26,7 +26,7 @@ namespace Client.Service.Services
         }
 
         public async Task<IActionResult> GetOne(GenericSingleRequestModel<ClientModel> request)
-        {          
+        {                                 
 
             var result = await _repository.GetClientById(request.Id);
 
@@ -35,7 +35,10 @@ namespace Client.Service.Services
 
         public async Task<IActionResult> Delete(GenericDeleteRequestModel<ClientModel> request)
         {
+            var resultPhone = _phoneRepository.DeletePhones(request.Id);
+
             _repository.Delete(request.Id);
+
             return new NoContentResult();
         }
 

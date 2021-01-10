@@ -12,6 +12,7 @@ namespace Client.Data.Repository
 
         Task<List<Phone>> GetClientById(int id);                
         Task<IList<Phone>> AddOrUpdatePhone(IList<Phone> model, int clientId);
+        Task<IList<Phone>> DeletePhones(int clientId);
     }
     
     public class PhoneRepository : ARepository<Phone>, IPhoneRepository
@@ -60,6 +61,24 @@ namespace Client.Data.Repository
                 _context.Entry(item).State = action;
                 _context.SaveChanges();
             }
+
+            return list;
+        }
+
+
+        public async Task<IList<Phone>> DeletePhones(int clientId)
+        {            
+
+            var list = DbContext.Set<Phone>()
+                .AsNoTracking()
+                .Where(c => c.ClientId == clientId).ToList();
+
+            list.ForEach(i =>
+            {
+                _context.Entry(i).State = EntityState.Deleted;
+            });
+
+            _context.SaveChanges();            
 
             return list;
         }

@@ -91,6 +91,7 @@ namespace Client.Microservice
 			});
 
 			app.UseRouting();
+			app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 			app.UseAuthorization();
 
