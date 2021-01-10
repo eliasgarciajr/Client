@@ -5,6 +5,10 @@ using Client.Data.Repository;
 using Client.Model.Data;
 using Client.Model.ViewModels;
 using ClientModel = Client.Model.Data.AClient;
+using System;
+using Client.Model.ValueObjects;
+using System.Security.Cryptography;
+
 namespace Client.Service.Services
 {
     public class ClientService : IClientService
@@ -43,7 +47,15 @@ namespace Client.Service.Services
         }
 
         public async Task<IActionResult> Post(ClientPostRequestModel request)
-        {            
+        {
+            if (!Utility.IsValidEmail(request.Data.Email)) return new BadRequestObjectResult("Email inválido");
+
+            if (request.Data.DateBirth > DateTime.Now) return new BadRequestObjectResult("Data de aniversário não pode ser igual ou maior que hoje!");
+
+            var hash = new Hash(SHA512.Create());
+
+            request.Data.Password = hash.Encrypt(request.Data.Password);
+
             _repository.Insert(request.Data);
             return new OkObjectResult(request.Data);
         }
@@ -51,11 +63,28 @@ namespace Client.Service.Services
         public async Task<IActionResult> Put(ClientPutRequestModel request)
         {
 
-            var result = _repository.UpdateClient(request.Data);
+            try
+            {                
+                if (!Utility.IsValidEmail(request.Data.Email)) return new BadRequestObjectResult("Email inválido");
 
-            var resultPhone = _phoneRepository.AddOrUpdatePhone(request.Data.Phones, request.Data.Id);
+                if (request.Data.DateBirth > DateTime.Now) return new BadRequestObjectResult("Data de aniversário não pode ser igual ou maior que hoje!");
 
-            return new OkObjectResult(result.Id);
+                var hash = new Hash(SHA512.Create());
+
+                request.Data.Password = hash.Encrypt(request.Data.Password);
+
+                var result = _repository.UpdateClient(request.Data);
+
+                var resultPhone = _phoneRepository.AddOrUpdatePhone(request.Data.Phones, request.Data.Id);
+
+                return new OkObjectResult(result.Id);
+            }
+            catch (Exception ex)
+            {
+                return new BadRequestObjectResult("Error! " + ex.Message);
+            }
+
+            
         }
        
     }
