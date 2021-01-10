@@ -12,4 +12,14 @@ Tecnologias utilizadas no backend:
 - Entity Framework;
 - Swagger;
 - MediatorR;
-- SQL Server 
+- SQL Server;
+
+Criei uma solução de front já toda estruturada pra um CRUD, mas devido ao tempo só coloquei uma listagem de clientes pra consumir a API.
+
+Tecnologias utilizadas no frontend.
+- NODE.JS;
+- ANGULAR 11;
+- BOOTSTRAP;
+- NGX-BOOTSTRAP;
+
+Na pasta raiz adicionei uma Collection do Postaman.
