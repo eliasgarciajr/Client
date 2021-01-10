@@ -50,7 +50,7 @@ namespace Client.Microservice
 
 			services.RegistServices();
 
-			services.AddMvc();
+			services.AddMvc();						
 
 			services.AddSwaggerGen(c =>
 			{

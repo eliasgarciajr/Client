@@ -9,22 +9,24 @@ namespace Client.Service.Services
 {
     public class ClientService : IClientService
     {
-        private IARepository<ClientModel> _repository;
+        //private IARepository<ClientModel> _repository;
 
-        public ClientService(IARepository<ClientModel> repository)
+        private IClientRepository _repository;
+        public ClientService(IClientRepository repository)
         {
             _repository = repository;
         }
         public async Task<IActionResult> GetAll(ClientListRequestModel request)
         {
-            var lst = await _repository.ToListAnsyc();
+            var lst = await _repository.GetClient();         
+
             return new OkObjectResult(lst.ToList());
         }
 
         public async Task<IActionResult> GetOne(GenericSingleRequestModel<ClientModel> request)
         {          
 
-            var result = _repository.Find(c => c.Id == request.Id);
+            var result = await _repository.GetClientById(request.Id);
 
             return new OkObjectResult(result);
         }
