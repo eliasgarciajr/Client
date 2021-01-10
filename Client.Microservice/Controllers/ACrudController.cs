@@ -58,11 +58,8 @@ namespace Client.Microservice.Controllers
 
         [HttpPut("{id}")]
         public virtual async Task<IActionResult> Put([FromRoute] int id, [FromBody] TU request)
-        {
-            var oid = request.GetType().GetProperty("Id")?.GetValue(request)?.ToString();
-            if (id.ToString().Equals(oid))
-                return await _mediator.Send(request);
-            return BadRequest("Dados inconsistentes");
+        {            
+            return await _mediator.Send(request);            
         }        
         
     }

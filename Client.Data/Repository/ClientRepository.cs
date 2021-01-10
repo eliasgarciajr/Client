@@ -12,6 +12,7 @@ namespace Client.Data.Repository
 
         Task<List<AClient>> GetClient();
         Task<AClient> GetClientById(int id);
+        Task<AClient> UpdateClient(AClient model);
     }
     
     public class ClientRepository : ARepository<AClient>, IClientRepository
@@ -22,7 +23,6 @@ namespace Client.Data.Repository
         {
             _context = context;
         }
-
 
         public async Task<List<AClient>> GetClient()
         {
@@ -40,8 +40,19 @@ namespace Client.Data.Repository
                 .Include(a => a.Phones)
                 .AsNoTracking()
                 .Where(c => c.Id == id).FirstOrDefault();                                
-
+            
             return list;
         }
+
+        public async Task<AClient> UpdateClient(AClient entity)
+        {
+            _context.Attach(entity);
+            _context.Entry(entity).State = EntityState.Modified;
+            _context.SaveChanges();
+            
+            return entity;
+        }
+
     }
+
 }

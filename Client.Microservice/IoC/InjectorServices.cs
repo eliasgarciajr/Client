@@ -22,8 +22,11 @@ namespace Client.Microservice.IoC
 				services.AddScoped<IARepository<AClient>, ClientRepository>();				
 				services.AddScoped(typeof(IClientRepository), typeof(ClientRepository));
 
+				services.AddScoped<IARepository<Phone>, PhoneRepository>();
+				services.AddScoped(typeof(IPhoneRepository), typeof(PhoneRepository));
 
-			}
+
+		}
 		}
 
 }

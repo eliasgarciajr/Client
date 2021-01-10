@@ -12,9 +12,11 @@ namespace Client.Service.Services
         //private IARepository<ClientModel> _repository;
 
         private IClientRepository _repository;
-        public ClientService(IClientRepository repository)
+        private IPhoneRepository _phoneRepository;
+        public ClientService(IClientRepository repository, IPhoneRepository phoneRepository)
         {
             _repository = repository;
+            _phoneRepository = phoneRepository;
         }
         public async Task<IActionResult> GetAll(ClientListRequestModel request)
         {
@@ -38,17 +40,19 @@ namespace Client.Service.Services
         }
 
         public async Task<IActionResult> Post(ClientPostRequestModel request)
-        {
-            //var model = new GatheringModel();
+        {            
             _repository.Insert(request.Data);
             return new OkObjectResult(request.Data);
         }
 
         public async Task<IActionResult> Put(ClientPutRequestModel request)
         {
-            //var model = new GatheringModel();
-            _repository.Update(request.Data);
-            return new OkObjectResult(request.Data);
+
+            var result = _repository.UpdateClient(request.Data);
+
+            var resultPhone = _phoneRepository.AddOrUpdatePhone(request.Data.Phones, request.Data.Id);
+
+            return new OkObjectResult(result.Id);
         }
        
     }

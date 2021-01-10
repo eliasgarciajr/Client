@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Client.Model.Data;
 using Microsoft.EntityFrameworkCore;
 
 #endregion
@@ -136,5 +137,6 @@ namespace Client.Data.Repository
         private Microsoft.EntityFrameworkCore.DbContext _context;
 		private DbSet<TEntity> _dbSet;
 		#endregion Private Fields
+		
 	}
 }

@@ -18,7 +18,7 @@ namespace Client.Microservice.Controllers
     {
         public ClientController(ILogger<ClientController> logger, IMediator mediator) : base(logger, mediator)
         {
-        }      
-      
+        }
+
     }
 }
