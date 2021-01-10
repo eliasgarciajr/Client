@@ -22,4 +22,4 @@ Tecnologias utilizadas no frontend.
 - BOOTSTRAP;
 - NGX-BOOTSTRAP;
 
-Na pasta raiz adicionei uma Collection do Postaman.
+Na pasta raiz adicionei uma Collection do Postman.
